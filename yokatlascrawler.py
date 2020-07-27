@@ -77,7 +77,7 @@ for bolum in yokatlasparameters.bolumler:
             try:
                 WebDriverWait(driver, 60).until(EC.visibility_of_element_located((By.XPATH, '//*[@id="icerik_1070"]/table')))
                 WebDriverWait(driver, 60).until(EC.visibility_of_element_located((By.XPATH, '//*[@id="icerik_1000_2"]/table')))
-                arewedone = false
+                arewedone = False
             except TimeoutException:
                 driver.refresh()
         university_last_person_score = driver.find_element_by_xpath('//*[@id="icerik_1070"]/table/tbody/tr[6]/td[2]').text

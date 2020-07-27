@@ -3,9 +3,8 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-from selenium.common.exceptions import NoSuchElementException
+from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.chrome.options import Options
-from parsel import Selector
 from time import sleep
 import yokatlasparameters
 import operator
@@ -72,9 +71,15 @@ for bolum in yokatlasparameters.bolumler:
         driver.find_element_by_xpath('//*[@id="h1070"]/a/h4/span[1]').click()
         driver.find_element_by_xpath('//*[@id="headingEleven"]/a/h4/span[1]').click()
 
-        WebDriverWait(driver, 60).until(EC.visibility_of_element_located((By.XPATH, '//*[@id="icerik_1070"]/table')))
-        WebDriverWait(driver, 60).until(EC.visibility_of_element_located((By.XPATH, '//*[@id="icerik_1000_2"]/table')))
-
+        arewedone = True
+        
+        while (arewedone):
+            try:
+                WebDriverWait(driver, 60).until(EC.visibility_of_element_located((By.XPATH, '//*[@id="icerik_1070"]/table')))
+                WebDriverWait(driver, 60).until(EC.visibility_of_element_located((By.XPATH, '//*[@id="icerik_1000_2"]/table')))
+                arewedone = false
+            except TimeoutException:
+                driver.refresh()
         university_last_person_score = driver.find_element_by_xpath('//*[@id="icerik_1070"]/table/tbody/tr[6]/td[2]').text
         university_quota = driver.find_element_by_xpath('//*[@id="icerik_1000_2"]/table/tbody/tr[5]/td[2]').text
         university_name = driver.find_element_by_xpath('/html/body/div[2]/div[1]/div[1]/div/h3[1]').text

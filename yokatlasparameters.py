@@ -1,6 +1,6 @@
 #Driver Yolu
 #Ornek: C:/selenium/chromedriver/bin/chromedriver.exe
-chrome_driver_path = 'C:/Users/desmi/Documents/javaaaa/selenium/chromedriver/bin/chromedriver.exe'
+chrome_driver_path = ''
 
 #Size getirmesini istediğiniz bölümleri seçin
 bolumler = [
